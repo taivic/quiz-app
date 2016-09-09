@@ -58,20 +58,38 @@ $(document).ready(function() {
 		displayQuestion: function(index) {
 			$("#questions").empty();
 			$("#questions").append("<p>" + this.questions[index].text + "</p>");
+			$.each(this.questions[index].answers, function()
+			{
+				$("#answers").append($("<input type=radio>").text(this));
+			});
 		}
 	}
 
 //global variables
 	var currentQuestion = 0;
 	var score = 0;
-	quiz.displayQuestion(currentQuestion) = quiz.questions[0]
+	quiz.displayQuestion(currentQuestion)
+	var userAnswer;
 	
-//next button
+	
+//next question
 	function nextQuestion() {
-  if (currentQuestion < quiz.questions.length) {
-     quiz.questions++;
-  }
-  else {
-     quiz.questions = 0;   
-  }
-};
+		$(".next").mousedown(function() {			
+			displayQuestion(currentQuestion) {
+				for (currentQuestion=0; i< quiz.questions.length; currentQuestion++);
+			}
+		});
+	};
+
+	nextQuestion()
+	 
+//take and show score
+	function (getScore) {
+		 userAnswer = //how to declare userAnswer?
+		 if (userAnswer.checked) {
+		 	if (userAnswer.value == quiz.questions[index].correct) {
+		 		score++;
+		 	}
+		 }
+	}
+});
