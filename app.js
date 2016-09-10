@@ -53,43 +53,48 @@ $(document).ready(function() {
 				text: "Is walking considered exercising?",
 				answers: ["absolutely", "Nah", "Just a little", "It's bad for you"],
 				correct: 0
-			},
+			}
 		],
 		displayQuestion: function(index) {
 			$("#questions").empty();
 			$("#questions").append("<p>" + this.questions[index].text + "</p>");
-			$.each(this.questions[index].answers, function()
-			{
-				$("#answers").append($("<input type=radio>").text(this));
+			$.each(this.questions[index].answers, function() {
+				$("#answers").append("<input type='radio' name='answers' value='" +
+					index+"' id='answers"+index+"'/>" + 
+					"<label for='answers"+index+"'>" + this + "</label>");
 			});
+			$("#questions").append("<button id='submit'>Submit</button>")
 		}
 	}
 
 //global variables
 	var currentQuestion = 0;
 	var score = 0;
-	quiz.displayQuestion(currentQuestion)
+	quiz.displayQuestion(currentQuestion);
 	var userAnswer;
 	
 	
-//next question
-	function nextQuestion() {
-		$(".next").mousedown(function() {			
-			displayQuestion(currentQuestion) {
-				for (currentQuestion=0; i< quiz.questions.length; currentQuestion++);
-			}
-		});
-	};
-
-	nextQuestion()
+//next question button
+	function nextQuestion() {			
+		for (currentQuestion = 0; currentQuestion < quiz.questions.length; currentQuestion++);
+		quiz.displayQuestion(currentQuestion);
+	}
+	
+	$("#next").mousedown(function() {
+		nextQuestion();
+	})
+	
 	 
 //take and show score
-	function (getScore) {
-		 userAnswer = //how to declare userAnswer?
-		 if (userAnswer.checked) {
-		 	if (userAnswer.value == quiz.questions[index].correct) {
-		 		score++;
-		 	}
-		 }
-	}
+	/*function getAnswer() {
+		userAnswer = //how to declare userAnswer?
+		if (userAnswer.checked) {
+			if (userAnswer.value == quiz.questions[index].correct) {
+				score++;
+			}
+	 	}
+	}*/
+	$(document).on("click","#submit",function() {
+		console.log("answer selected");
+	})
 });
