@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 //Quiz object
 	var quiz = {
 		name: "Health and Wellness",
@@ -66,35 +65,42 @@ $(document).ready(function() {
 			$("#questions").append("<button id='submit'>Submit</button>")
 		}
 	}
-
 //global variables
 	var currentQuestion = 0;
 	var score = 0;
 	quiz.displayQuestion(currentQuestion);
-	var userAnswer;
-	
-	
-//next question button
-	function nextQuestion() {			
-		for (currentQuestion = 0; currentQuestion < quiz.questions.length; currentQuestion++);
-		quiz.displayQuestion(currentQuestion);
-	}
-	
-	$("#next").mousedown(function() {
-		nextQuestion();
-	})
-	
-	 
-//take and show score
-	/*function getAnswer() {
-		userAnswer = //how to declare userAnswer?
-		if (userAnswer.checked) {
-			if (userAnswer.value == quiz.questions[index].correct) {
-				score++;
-			}
-	 	}
-	}*/
+//submit, get answer, add score
 	$(document).on("click","#submit",function() {
-		console.log("answer selected");
+		//get value of selected radio button
+		var radioButton = $("answers"+index+":checked");
+		var radio = $(".answers"+index+"")
+		var userAnswer = radio.index(radioButton);
+		console.log(userAnswer);
+		//compare value to correct answer
+		$("#submit").mousedown(function() {
+		//increment score
+			function evaluate() {
+				if (userAnswer.value === this.questions[index].correct) {
+					score++;
+				}
+				else {
+					score + 0;
+				}
+			}
+			nextQuestion();
+		});
+		//call next question if question<length
+		function nextQuestion() {			
+			if (currentQuestion < quiz.questions.length) {
+				quiz.displayQuestion(currentQuestion);
+			}
+			else {
+				displayResult();
+			}
+		}
+		//The Score
+		function displayResult() {
+			$("#results").append(score)
+		}
 	})
 });
