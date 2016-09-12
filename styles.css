@@ -1,0 +1,18 @@
+button {
+  margin: 20px 0;
+}
+
+body {
+  width: 50%;
+  margin: 0 auto;
+}
+
+#submit {
+  margin-left: 20px;
+  background-color: blue;
+  color: #fff;
+}
+
+.answerLabel {
+  margin-right: 10px;
+}

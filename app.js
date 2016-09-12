@@ -9,12 +9,12 @@ $(document).ready(function() {
 				correct: 1
 			},
 			{
-				text: "How much “biking” is “running”? (ratio)",
+				text: 'How much &quot;biking&quot; is &quot;running&quot;? (ratio)',
 				answers: ["2:1", "1:2", "3:1", "1:3"],
 				correct: 2
 			},
 			{
-				text: "How much “swimming” is “running”? (ratio)",
+				text: 'How much &quot;swimming&quot; is &quot;running&quot;? (ratio)',
 				answers: ["1:4", "4:1", "2:1", "1:2"],
 				correct: 0
 			},
@@ -54,15 +54,16 @@ $(document).ready(function() {
 				correct: 0
 			}
 		],
-		displayQuestion: function(index) {
+		displayQuestion: function(currentQuestion) {
 			$("#questions").empty();
-			$("#questions").append("<p>" + this.questions[index].text + "</p>");
-			$.each(this.questions[index].answers, function() {
+			$("#questions").append("<p>" + this.questions[currentQuestion].text + "</p>");
+			$("#answers").empty();
+			$.each(this.questions[currentQuestion].answers, function(index, value) {
 				$("#answers").append("<input type='radio' name='answers' value='" +
 					index+"' id='answers"+index+"'/>" + 
-					"<label for='answers"+index+"'>" + this + "</label>");
+					"<label for='answers' class='answerLabel'"+index+"'>" + value + "</label>");
 			});
-			$("#questions").append("<button id='submit'>Submit</button>")
+			$("#answers").append("<button id='submit'>Submit</button>")
 		}
 	}
 //global variables
@@ -72,25 +73,24 @@ $(document).ready(function() {
 //submit, get answer, add score
 	$(document).on("click","#submit",function() {
 		//get value of selected radio button
-		var radioButton = $("answers"+index+":checked");
-		var radio = $(".answers"+index+"")
-		var userAnswer = radio.index(radioButton);
-		console.log(userAnswer);
+		var selectedAnswer = $("input:checked").val();
+		console.log(selectedAnswer);
+		// var radioButton = $("answers"+index+":checked");
+		// var radio = $(".answers"+index+"")
+		// var userAnswer = radio.index(radioButton);
+		// console.log(userAnswer);
 		//compare value to correct answer
-		$("#submit").mousedown(function() {
 		//increment score
-			function evaluate() {
-				if (userAnswer.value === this.questions[index].correct) {
-					score++;
-				}
-				else {
-					score + 0;
-				}
-			}
-			nextQuestion();
-		});
+
+		if (selectedAnswer == quiz.questions[currentQuestion].correct) {
+			score++;
+		}
+		console.log(score);
+		nextQuestion();
+
 		//call next question if question<length
-		function nextQuestion() {			
+		function nextQuestion() {		
+			currentQuestion++;	
 			if (currentQuestion < quiz.questions.length) {
 				quiz.displayQuestion(currentQuestion);
 			}
@@ -100,7 +100,7 @@ $(document).ready(function() {
 		}
 		//The Score
 		function displayResult() {
-			$("#results").append(score)
+			$("#results").append(score);
 		}
 	})
 });
