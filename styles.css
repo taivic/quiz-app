@@ -16,3 +16,15 @@ body {
 .answerLabel {
   margin-right: 10px;
 }
+
+#reset {
+	margin-left: 20px;
+	background-color: yellow;
+	color: black;
+}
+
+#answers {
+	border-style: solid 1px #A9A9A9;
+	padding-left: 20px;
+	padding-right: 20px;
+}

@@ -100,7 +100,15 @@ $(document).ready(function() {
 		}
 		//The Score
 		function displayResult() {
-			$("#results").append(score);
+			$("#questions").empty();
+			$("#questions").append(" Your Score is: " + score + " out of 10! ");
+			$("#answers").empty();
+			$("#answers").append("<button id='reset'>Start Over</button>");
 		}
 	})
+
+	$(document).on("click","#reset",function() {
+		window.location.reload();
+	});
 });
+
